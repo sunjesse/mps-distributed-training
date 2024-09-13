@@ -84,14 +84,12 @@ def run(args):
 
     init_end_event.record()
 
-    if rank == 0:
-        print(f"CUDA event elapsed time: {init_start_event.elapsed_time(init_end_event) / 1000}sec")
-        print(f"{model}")
+    print(f"Event elapsed time: {init_start_event.elapsed_time(init_end_event) / 1000}sec")
+    print(f"{model}")
 
     if args.save_model:
         states = model.state_dict()
-        if rank == 0:
-            torch.save(states, "mnist_cnn.pt")
+        torch.save(states, "mnist_cnn.pt")
 
     cleanup()
 
